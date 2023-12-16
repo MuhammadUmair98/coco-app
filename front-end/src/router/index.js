@@ -3,6 +3,30 @@ import MyHome from '../views/MyHome.vue'
 
 const routes = [
   {
+    path: "/",
+    name: "dashboard",
+    props: true,
+    component: () => import("../components/customer/dashboard.vue"),
+  },
+  {
+    path: "/about",
+    name: "about",
+    props: true,
+    component: () => import("../components/customer/about.vue"),
+  },
+  {
+    path: "/contact",
+    name: "contact",
+    props: true,
+    component: () => import("../components/customer/contact.vue")
+  },
+  {
+    path: "/services",
+    name: "services",
+    props: true,
+    component: () => import("../components/customer/services.vue")
+  },
+  {
     path: '/',
     name: 'MyHome',
     component: MyHome
@@ -11,6 +35,11 @@ const routes = [
     path: "/auth",
     name: "auth",
     component: () => import("../components/authComponent.vue"),
+  },
+  {
+    path: "/signUp",
+    name: "signup",
+    component: () => import("../components/signUp.vue"),
   },
 ]
 const router = createRouter({

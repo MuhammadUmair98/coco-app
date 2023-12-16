@@ -10,7 +10,7 @@ async function login(req, res, next) {
         }
         const checkPassword = await userService.decryptPassword(password, user.password);
         if (!checkPassword) {
-            throw new Error('passwor is wrong');
+            throw new Error('password is wrong');
         }
         const payload = { id: user.id, email: user.email, roleId: user.roleId };
         const userToken = userService.authenticateUser(payload);

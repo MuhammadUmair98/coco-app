@@ -5,9 +5,9 @@
                 class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Add Project
+                        Edit Project
                     </h1>
-                    <form class="space-y-4 md:space-y-6" @submit.prevent="login()">
+                    <form class="space-y-4 md:space-y-6" @submit.prevent="editProject()">
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project
                                 Name</label>
@@ -44,8 +44,8 @@
                             </VueDatePicker>
                         </div>
                         <div>
-                            <VueMultiselect v-model="selected" :options="equipments" :multiple="true" :close-on-select="true"
-                                placeholder="Select Equipment" label="equip_name">
+                            <VueMultiselect v-model="selected" :options="equipments" :multiple="true"
+                                :close-on-select="true" placeholder="Select Equipment" label="equip_name">
                             </VueMultiselect>
                         </div>
 
@@ -71,34 +71,28 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import VueMultiselect from 'vue-multiselect'
 
 export default {
-    props: ['data'],
     components: { VueDatePicker, VueMultiselect },
     data() {
         return {
-            project: {
-                proj_name: "",
-                proj_desc: "",
-                proj_address: "",
-                proj_start_date: "",
-                proj_completion_date: "",
-                project_bucket_identifier: ""
-            },
+            project: {},
             datePickerFormat: 'yyyy-MM-dd',
-            equipments : [],
+            equipments: [],
             selected: null
         };
     },
     mounted() {
-        this.fetchEquipments();
+       this.project.id = this.$route.params.id;
+       this.fetchProject();
+       this.fetchEquipments();
     },
     methods: {
-        async login() {
+        async editProject() {
             try {
-                const response = await axios.post(
+                const response = await axios.put(
                     "http://localhost:3000/api/projects",
-                    { ...this.project , equipments : this.selected ?? [] }
+                    { ...this.project, id : this.$route.params.id, equipments: this.selected ?? [] }
                 );
-                this.$root.$refs.toast.showToast(`Project added successfully...`, "success");
+                this.$root.$refs.toast.showToast(`Project edited successfully...`, "success");
                 //this.$router.push('/projects');
                 return response;
             } catch (error) {
@@ -106,6 +100,16 @@ export default {
                     `${error.response.data.message}.....`,
                     "error"
                 );
+            }
+        },
+        async fetchProject() {
+            try {
+                const response = await axios.get(`http://localhost:3000/api/projects/${this.project.id}`);
+                this.project = response.data.data;
+                this.selected =  this.project.project_equipments;
+                return response;
+            } catch (error) {
+                console.error('Error fetching projects:', error);
             }
         },
         async fetchEquipments() {

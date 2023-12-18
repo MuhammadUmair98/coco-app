@@ -53,6 +53,18 @@ const routes = [
     props: true,
     component: () => import("../components/company/projectDetails.vue"),
   },
+  {
+    path: "/editProject/:id",
+    name: "editProject",
+    props: true,
+    component: () => import("../components/company/editProject.vue"),
+  },
+  {
+    path: "/taskView/:id",
+    name: "taskView",
+    props: true,
+    component: () => import("../components/company/task/taskView.vue"),
+  },
 ]
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

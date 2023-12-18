@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../dbConfig/db.connection');
 const ProjectEquipments = require('./projectEquipments');
+const TasksModel = require('./tasks.model');
 
 const Projects = sequelize.define('project', {
     proj_id: {
@@ -49,5 +50,9 @@ Projects.hasMany(ProjectEquipments, {
     foreignKey: 'proj_id',
     as: 'project_equipments'
 });
+Projects.hasMany(TasksModel,{
+    foreignKey : 'proj_task_id',
+    as : 'project_tasks'
+})
 
 module.exports = Projects;

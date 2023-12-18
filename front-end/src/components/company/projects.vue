@@ -1,7 +1,7 @@
 <template>
     <div class="relative overflow-x-auto my-20">
         <div class="flex justify-start mb-2 my-2 mx-2 bg-white-500">
-            <button @click="addEditProject" class="bg-blue-500 text-white px-4 py-2 rounded">
+            <button @click="addProject" class="bg-blue-500 text-white px-4 py-2 rounded">
                 Add Project
             </button>
         </div>
@@ -47,10 +47,10 @@
                         {{ project.proj_completion_date }}
                     </td>
                     <td class="px-6 py-4">
-                        <button @click="addEditProject(project)" class="bg-blue-500 text-white px-4 py-2 rounded">
+                        <button @click="editProject(project)" class="bg-blue-500 text-white px-4 py-2 rounded">
                             Edit
                         </button>
-                        <button @click="openAddProjectModal" class="bg-blue-500 text-white px-4 py-2 rounded">
+                        <button @click="taskView(project)" class="bg-blue-500 text-white px-4 py-2 rounded">
                             Task / SubTask
                         </button>
                     </td>
@@ -86,8 +86,14 @@ export default {
                 console.error('Error fetching projects:', error);
             }
         },
-        addEditProject: function (project) {
-            this.$router.push({ name: 'projectView', data: { projectProps : 1 } });
+        addProject: function () {
+            this.$router.push('projectView');
+        },
+        editProject: function (project) {
+            this.$router.push({ name: 'editProject',  params: { id: project.proj_id } });
+        },
+        taskView: function (project) {
+            this.$router.push({ name: 'taskView',  params: { id: project.proj_id } });
         }
     }
 };

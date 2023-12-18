@@ -41,6 +41,18 @@ const routes = [
     name: "signup",
     component: () => import("../components/signUp.vue"),
   },
+  {
+    path: "/projects",
+    name: "projects",
+    props : true,
+    component: () => import("../components/company/projects.vue")
+  },
+  {
+    path: "/projectView",
+    name: "projectView",
+    props: true,
+    component: () => import("../components/company/projectDetails.vue"),
+  },
 ]
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

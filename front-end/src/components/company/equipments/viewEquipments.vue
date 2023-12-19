@@ -88,7 +88,7 @@ export default {
             }
         },
         addEquipmentsView: function () {
-            this.$router.push('projectView');
+            this.$router.push('/addEquipments');
         }
     }
 };

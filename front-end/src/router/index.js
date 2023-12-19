@@ -48,6 +48,18 @@ const routes = [
     component: () => import("../components/company/projects.vue")
   },
   {
+    path: "/equipments",
+    name: "equipments",
+    props : true,
+    component: () => import("../components/company/equipments/viewEquipments.vue")
+  },
+  {
+    path: "/addEquipments",
+    name: "addEquipments",
+    props : true,
+    component: () => import("../components/company/equipments/addEquipments.vue")
+  },
+  {
     path: "/projectView",
     name: "projectView",
     props: true,
@@ -64,6 +76,12 @@ const routes = [
     name: "taskView",
     props: true,
     component: () => import("../components/company/task/taskView.vue"),
+  },
+  {
+    path: "/addSubTask/:id",
+    name: "addSubTask",
+    props: true,
+    component: () => import("../components/company/subTask/addSubTask.vue"),
   },
 ]
 const router = createRouter({

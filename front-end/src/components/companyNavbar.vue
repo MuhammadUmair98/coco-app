@@ -32,6 +32,14 @@
           </router-link>
         </li>
         <li>
+          <router-link to="/Equipments">
+            <a
+              class="block py-2 pl-3 pr-4 rounded md:p-0 text-gray-400 hover:text-orange-300"
+              >Equipments</a
+            >
+          </router-link>
+        </li>
+        <li>
           <a
             class="block py-2 pl-3 pr-4 rounded md:p-0 text-gray-400 hover:text-orange-300 cursor-pointer"
             @click="handleSignOut"

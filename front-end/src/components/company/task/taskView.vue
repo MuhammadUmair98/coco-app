@@ -70,7 +70,7 @@
       </div>
     </div>
     <div>
-      <div class="relative overflow-x-auto">
+      <div class="relative overflow-x-auto my-4">
         <div class="flex justify-between items-center p-4">
           <h1 class="m-0">SubTask List</h1>
         </div>

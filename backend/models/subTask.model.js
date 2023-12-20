@@ -29,8 +29,8 @@ const SubTask = sequelize.define('subTask', {
     }
 }, {
     timestamps: false,
-    tableName: 'subtask',
-    modelName: 'subtask'
+    tableName: 'subTask',
+    modelName: 'subTask'
 });
 
 module.exports = SubTask;

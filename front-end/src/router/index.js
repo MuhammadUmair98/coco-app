@@ -78,6 +78,12 @@ const routes = [
     component: () => import("../components/company/task/taskView.vue"),
   },
   {
+    path: "/addTask/:id",
+    name: "addTask",
+    props: true,
+    component: () => import("../components/company/task/addTask.vue"),
+  },
+  {
     path: "/addSubTask/:id",
     name: "addSubTask",
     props: true,

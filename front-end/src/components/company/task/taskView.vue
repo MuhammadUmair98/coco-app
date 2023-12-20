@@ -56,7 +56,7 @@
                 </button>
                 <button
                   @click="addSubTaskView(project.task_id)"
-                  class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded my-2"
+                  class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded my-2 mx-1"
                 >
                   Add SubTasks
                 </button>

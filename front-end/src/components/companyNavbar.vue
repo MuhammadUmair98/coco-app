@@ -23,14 +23,14 @@
             >
           </router-link>
         </li>
-        <li>
+        <!-- <li>
           <router-link to="/Management">
             <a
               class="block py-2 pl-3 pr-4 rounded md:p-0 text-gray-400 hover:text-orange-300"
               >Management</a
             >
           </router-link>
-        </li>
+        </li> -->
         <li>
           <router-link to="/Equipments">
             <a

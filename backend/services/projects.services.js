@@ -122,6 +122,10 @@ async function getSubTaskFiles(subTaskId) {
     return result;
 }
 
+async function deleteFile(id){
+    return models.filesModel.destroy({where : {id}})
+}
+
 
 module.exports = {
     getAll,
@@ -136,5 +140,6 @@ module.exports = {
     projectTaskWithSubTask,
     addFiles,
     getTaskFiles,
-    getSubTaskFiles
+    getSubTaskFiles,
+    deleteFile
 }

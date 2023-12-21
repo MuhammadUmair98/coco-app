@@ -109,11 +109,14 @@ export default {
           "http://localhost:3000/api/users/login",
           { email: this.email, password: this.password }
         );
+        this.$store.commit('setLoggedIn', true);
         localStorage.setItem("token", response.data?.data?.token);
         localStorage.setItem("role", response.data?.data?.role?.name);
         this.$root.$refs.toast.showToast(`login success...`, "success");
-        location.reload();
-        //this.$router.push('/projects');
+        //location.reload();
+        this.$nextTick(() => {
+          this.$router.push('/projects');
+        });
         return response;
       } catch (error) {
         this.$root.$refs.toast.showToast(

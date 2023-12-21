@@ -25,7 +25,7 @@
               <th scope="col" class="px-6 py-3">Start Date</th>
               <th scope="col" class="px-6 py-3">Completion Date</th>
               <th scope="col" class="px-6 py-3">Actions</th>
-              <th scope="col" class="px-6 py-3">Attachments</th>
+              <th  scope="col" class="px-6 py-3">Attachments</th>
             </tr>
           </thead>
           <tbody>

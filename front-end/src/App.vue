@@ -3,7 +3,7 @@
     <main class="flex flex-row">
       <header class="w-full">
         <section class="text-center"></section>
-        <customerNavbar v-if="!showNavbar1" />
+        <customerNavbar v-if="!isLoggedIn" />
         <companyNavbar v-else />
       </header>
     </main>
@@ -25,6 +25,12 @@ export default {
     customerNavbar,
     companyNavbar,
     toast,
+  },
+  computed: {
+    isLoggedIn() {
+      console.log("",this.$store.state.auth.isLoggedIn)
+      return this.$store.state.auth.isLoggedIn;
+    },
   },
   data() {
     return {

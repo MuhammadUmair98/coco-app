@@ -109,9 +109,7 @@ export default {
           "http://localhost:3000/api/users/login",
           { email: this.email, password: this.password }
         );
-      // Inside a Vue component method
-this.$store.commit('setLoggedIn', true);
-
+        this.$store.commit('setLoggedIn', true);
         localStorage.setItem("token", response.data?.data?.token);
         localStorage.setItem("role", response.data?.data?.role?.name);
         this.$root.$refs.toast.showToast(`login success...`, "success");

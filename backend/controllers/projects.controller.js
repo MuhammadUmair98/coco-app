@@ -170,7 +170,9 @@ async function addFile(req, res, next) {
 
 async function deleteFile(req, res, next) {
     try {
-        const { fileId, parentId, identifier } = req.body;
+        const { fileId } = req.params;
+        await projectService.deleteFile(fileId);
+        res.status(200).json({ message: 'success' });
     } catch (error) {
         res.status(400).json({
             message: error.message,

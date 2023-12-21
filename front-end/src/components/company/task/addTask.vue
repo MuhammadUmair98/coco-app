@@ -94,7 +94,7 @@ export default {
                     { ...this.task }
                 );
                 this.$root.$refs.toast.showToast(`Task added successfully...`, "success");
-                //this.$router.push('/projects');
+                this.$router.go(-1);
                 return response;
             } catch (error) {
                 this.$root.$refs.toast.showToast(

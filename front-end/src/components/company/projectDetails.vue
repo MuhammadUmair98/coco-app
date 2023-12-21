@@ -99,7 +99,7 @@ export default {
                     { ...this.project , equipments : this.selected ?? [] }
                 );
                 this.$root.$refs.toast.showToast(`Project added successfully...`, "success");
-                //this.$router.push('/projects');
+                this.$router.go(-1);
                 return response;
             } catch (error) {
                 this.$root.$refs.toast.showToast(

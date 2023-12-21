@@ -56,6 +56,8 @@ export default {
   methods: {
     handleSignOut() {
       localStorage.setItem("token", "");
+      localStorage.setItem("role", "");
+      //this.$router.push('/auth');
       location.reload();
     },
   },

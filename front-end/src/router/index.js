@@ -72,10 +72,28 @@ const routes = [
     component: () => import("../components/company/editProject.vue"),
   },
   {
+    path: "/projectFiles/:id",
+    name: "projectFiles",
+    props: true,
+    component: () => import("../components/company/projectsFile.vue"),
+  },
+  {
     path: "/taskView/:id",
     name: "taskView",
     props: true,
     component: () => import("../components/company/task/taskView.vue"),
+  },
+  {
+    path: "/taskFiles/:id",
+    name: "taskFiles",
+    props: true,
+    component: () => import("../components/company/task/taskFiles.vue"),
+  },
+  {
+    path: "/subTaskFiles/:id",
+    name: "subTaskFiles",
+    props: true,
+    component: () => import("../components/company/subTask/subTaskFiles.vue"),
   },
   {
     path: "/addTask/:id",

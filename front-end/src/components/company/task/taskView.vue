@@ -5,6 +5,7 @@
         <div class="flex justify-between items-center p-4">
           <h1 class="m-0">Task List</h1>
           <button
+          v-if="userRole === 'Admin'"
             @click="addProjectTask"
             class="bg-blue-500 text-white px-4 py-2 rounded"
           >
@@ -24,6 +25,7 @@
               <th scope="col" class="px-6 py-3">Start Date</th>
               <th scope="col" class="px-6 py-3">Completion Date</th>
               <th scope="col" class="px-6 py-3">Actions</th>
+              <th scope="col" class="px-6 py-3">Attachments</th>
             </tr>
           </thead>
           <tbody>
@@ -50,12 +52,13 @@
               <td class="px-6 py-4">
                 <button
                   @click="viewSubTasks(project.task_id)"
-                  class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded"
+                  class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded my-2 mx-1"
                 >
-                  View SubTasks
+                  SubTasks
                 </button>
                 <button
                   @click="addSubTaskView(project.task_id)"
+                  v-if="userRole === 'Admin'"
                   class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded my-2 mx-1"
                 >
                   Add SubTasks
@@ -63,6 +66,14 @@
                 <!-- <button @click="taskView(project)" class="bg-blue-500 text-white px-4 py-2 rounded">
                                     Task / SubTask
                                 </button> -->
+              </td>
+              <td>
+              <button
+                  @click="viewFiles(project.task_id)"
+                  class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded my-2 mx-1"
+                >
+                  Files
+                </button>
               </td>
             </tr>
           </tbody>
@@ -86,7 +97,7 @@
               <th scope="col" class="px-6 py-3">Start Date</th>
               <th scope="col" class="px-6 py-3">Completion Date</th>
               <!-- <th scope="col" class="px-6 py-3">
-                                Actions
+                                Files
                             </th> -->
             </tr>
           </thead>
@@ -109,13 +120,11 @@
                 {{ project.subtask_comp_date }}
               </td>
               <!-- <td class="px-6 py-4">
-                                <button @click="editProject(project)" class="text-xs text-red-500">
-                                    View SubTasks
-                                </button>
-                                <button @click="taskView(project)" class="bg-blue-500 text-white px-4 py-2 rounded">
-                                    Task / SubTask
-                                </button>
-                            </td> -->
+                        
+                                  <button @click="taskView(project)" class="bg-blue-500 text-white px-4 py-2 rounded">
+                                     Files
+                                  </button>
+                              </td> -->
             </tr>
           </tbody>
         </table>
@@ -132,10 +141,12 @@ export default {
     return {
       projectsTaskSubTask: [],
       subTasks: [],
+      userRole : ''
     };
   },
   mounted() {
     this.fetchProjectsTask();
+    this.userRole = localStorage.getItem('role');
   },
   methods: {
     async fetchProjectsTask() {
@@ -160,6 +171,9 @@ export default {
     },
     addSubTaskView: function (taskId) {
       this.$router.push({ name: "addSubTask", params: { id: taskId } });
+    },
+    viewFiles:async  function (taskId) {
+      this.$router.push({ name: "taskFiles", params: { id: taskId } });
     },
   },
 };

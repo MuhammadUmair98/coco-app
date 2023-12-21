@@ -4,8 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 async function findUser(where) {
-    console.log(where)
-    return parse(await models.userModel.findOne({ where: where }));
+    return parse(await models.userModel.findOne({ where: where, include: { model: models.roleModels, as: 'role' } }));
 }
 
 async function encryptPassword(password) {

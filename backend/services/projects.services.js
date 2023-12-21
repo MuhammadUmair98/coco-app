@@ -1,6 +1,7 @@
 
 const models = require('../models/index');
 const { parse } = require('../helpers/index');
+const awsConfig = require('../config/aws.config');
 
 async function getAll() {
     return parse(await models.projectsModel.findAll({
@@ -30,7 +31,8 @@ async function update(id, data) {
 async function findOne(projectId) {
     return parse(await models.projectsModel.findOne({
         where: { proj_id: projectId },
-        include: {
+        include: [
+            {
             model: models.projectEquipments,
             as: 'project_equipments',
             required: false,
@@ -41,7 +43,13 @@ async function findOne(projectId) {
                     required: false
                 }
             ]
-        }
+        },
+        {
+            model: models.filesModel,
+            as: 'project_files',
+            required: false
+        },
+    ]
     }));
 }
 
@@ -79,6 +87,41 @@ async function projectTaskWithSubTask(projectId) {
     return projectTasksWithSubTask;
 }
 
+async function addFiles(identifier, id, url) {
+
+    const data = {
+        file_url: url
+    };
+    if (identifier == 'project') {
+        data.project_id = parseInt(id);
+    }
+    else if (identifier == 'task') {
+        data.task_id = parseInt(id);
+    }
+    else {
+        data.subtask_id = parseInt(id);
+    }
+    await models.filesModel.create(data);
+}
+
+async function getTaskFiles(taskId) {
+    const result = parse(await models.filesModel.findAll({
+        where: {
+            task_id : taskId
+        }
+    }));
+    return result;
+}
+
+async function getSubTaskFiles(subTaskId) {
+    const result = parse(await models.filesModel.findAll({
+        where: {
+            subtask_id: subTaskId
+        }
+    }));
+    return result;
+}
+
 
 module.exports = {
     getAll,
@@ -90,5 +133,8 @@ module.exports = {
     updateProjectEquipments,
     addTask,
     addSubTask,
-    projectTaskWithSubTask
+    projectTaskWithSubTask,
+    addFiles,
+    getTaskFiles,
+    getSubTaskFiles
 }

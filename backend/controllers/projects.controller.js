@@ -1,4 +1,5 @@
 const projectService = require('../services/projects.services');
+const awsConfig = require('../config/aws.config');
 
 async function getAll(req, res, next) {
     try {
@@ -135,6 +136,70 @@ async function projectsWithTaskAndSubtasks(req, res, next) {
     }
 }
 
+async function getFile(req,res,next) {
+    const { fileKey } = req.params;
+    try {
+      const result = await  awsConfig.downloadFileFrmoS3(fileKey);
+       res.send(result.Body);
+    } catch (error) {
+        res.status(400).json({
+            message: error.message,
+            error: error
+        });
+    }
+}
+
+async function addFile(req, res, next) {
+    try {
+        const { id , identifier } = req.body;
+        const response = await awsConfig.uploadToS3(req.file);
+        if(response?.Location){
+            await projectService.addFiles(identifier,id,response?.Location)
+        }
+        res.status(200).json({
+            data: response,
+            message: 'success'
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: error.message,
+            error: error
+        });
+    }
+}
+
+async function deleteFile(req, res, next) {
+    try {
+        const { fileId, parentId, identifier } = req.body;
+    } catch (error) {
+        res.status(400).json({
+            message: error.message,
+            error: error
+        });
+    }
+}
+
+async function getTaskSubTaskFiles(req, res, next) {
+    try {
+        const { id, identifier } = req.body;
+        let result;
+        if (identifier == 'task') {
+            result = await projectService.getTaskFiles(id)
+        }
+        else {
+            result = await projectService.getSubTaskFiles(id)
+        }
+        res.status(200).json({
+            data : result
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message,
+            error: error
+        });
+    }
+}
+
 module.exports = {
     getAll,
     add,
@@ -144,5 +209,9 @@ module.exports = {
     addTask,
     addSubTask,
     projectsWithTaskAndSubtasks,
-    get
+    get,
+    addFile,
+    getFile,
+    deleteFile,
+    getTaskSubTaskFiles
 }

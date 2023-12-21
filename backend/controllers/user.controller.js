@@ -18,6 +18,7 @@ async function login(req, res, next) {
             message: 'success',
             data: {
                 token: userToken,
+                role: user.role,
                 ...payload
             }
         })

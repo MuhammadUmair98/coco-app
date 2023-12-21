@@ -2,11 +2,12 @@
   <div class="relative overflow-x-auto my-20">
     <div class="flex justify-start mb-2 my-2 mx-2 bg-white-500">
       <button
-        @click="addProject"
-        class="bg-blue-500 text-white px-4 py-2 rounded"
-      >
-        Add Project
-      </button>
+          v-if="userRole === 'Admin'"
+          @click="addProject"
+          class="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Add Project
+        </button>
     </div>
     <table
       class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
@@ -60,6 +61,13 @@
             >
               Task / SubTask
             </button>
+            &nbsp;
+            <button
+              @click="filesView(project)"
+              class="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Files
+            </button>
           </td>
         </tr>
       </tbody>
@@ -79,9 +87,11 @@ export default {
       newProject: {
         proj_name: "",
       },
+      userRole : ''
     };
   },
   mounted() {
+    this.userRole = localStorage.getItem('role');
     this.fetchProjects();
   },
   methods: {
@@ -105,6 +115,9 @@ export default {
     taskView: function (project) {
       this.$router.push({ name: "taskView", params: { id: project.proj_id } });
     },
+    filesView: function (project) {
+      this.$router.push({ name: "projectFiles", params: { id: project.proj_id } });
+    }
   },
 };
 </script>

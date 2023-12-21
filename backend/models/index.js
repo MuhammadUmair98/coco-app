@@ -5,6 +5,7 @@ const equipments = require('./equipments.model');
 const projectEquipments = require('./projectEquipments');
 const tasksModel = require('./tasks.model');
 const subTask = require('./subTask.model');
+const filesModel = require('./files.model');
 
 module.exports = {
     userModel,
@@ -13,5 +14,6 @@ module.exports = {
     equipments,
     projectEquipments,
     tasksModel,
-    subTask
+    subTask,
+    filesModel
 }

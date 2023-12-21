@@ -122,6 +122,8 @@ async function getSubTaskFiles(subTaskId) {
     return result;
 }
 
+async function deleteFile(fileId,){}
+
 
 module.exports = {
     getAll,

@@ -57,8 +57,10 @@ export default {
     handleSignOut() {
       localStorage.setItem("token", "");
       localStorage.setItem("role", "");
-      //this.$router.push('/auth');
-      location.reload();
+      this.$store.commit('setLoggedIn', false);
+      this.$nextTick(() => {
+      this.$router.push('/');
+    });
     },
   },
 };

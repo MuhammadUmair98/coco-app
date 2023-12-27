@@ -93,6 +93,7 @@
                 :close-on-select="true"
                 placeholder="Select Equipment"
                 label="equip_name"
+                trackBy="equip_id"
               >
               </VueMultiselect>
             </div>

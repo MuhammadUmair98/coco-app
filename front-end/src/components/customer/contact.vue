@@ -2,10 +2,10 @@
     <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-20">
       <div class="mt-8 sm:mx-auto sm:w-2/3 sm:max-w-xlg">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <h1 class="text-3xl font-bold mb-6">Contact Us</h1>
+          <h1 class="text-3xl font-bold mb-6">Contact Us Today!</h1>
           <div class="flex flex-col md:flex-row">
             <div class="md:w-1/2 md:pr-6">
-              <h2 class="text-xl font-bold mb-3">Send us a message</h2>
+              <h2 class="text-xl font-bold mb-3">Send Us a Message</h2>
 
               <form @submit.prevent="submitForm">
                 <div class="mb-4">
@@ -35,6 +35,19 @@
                 </div>
 
                 <div class="mb-4">
+                  <label for="phone" class="block text-gray-700 font-bold mb-2"
+                    >Phone:</label
+                  >
+                  <input
+                    type="phone"
+                    id="phone"
+                    v-model="phone"
+                    class="w-full px-3 py-2 border border-gray-400 rounded-md"
+                    required
+                  />
+                </div>
+
+                <div class="mb-4">
                   <label
                     for="message"
                     class="block text-gray-700 font-bold mb-2"
@@ -58,10 +71,10 @@
             </div>
 
             <div class="md:w-1/2 md:pl-6">
-              <h2 class="text-xl font-bold mb-3">Get in touch</h2>
+              <h2 class="text-xl font-bold mb-3">Get in Touch</h2>
 
               <p class="mb-2">
-                <i class="fas fa-map-marker-alt mr-2"></i>Daniel Contreras
+                <i class="fas fa-map-marker-alt mr-2"></i>CoCo Construction
               </p>
               <p class="mb-2">
                 <i class="fas fa-phone mr-2"></i>+1 (512) 215-1622
@@ -73,8 +86,8 @@
               <h3 class="text-lg font-bold mb-2 mt-6">Follow Us</h3>
 
               <div class="flex items-center">
-                <a href="https://www.instagram.com/coco_constructionunderground/" class="text-gray-700 hover:text-blue-500 mr-4"
-                  ><i class="fab fa-instagram fa-2x">Instagram</i
+                <a href="https://www.instagram.com/coco_constructionunderground/" target="_blank" class="text-gray-700 hover:text-blue-500 mr-4"
+                  ><u class="fab fa-instagram fa-2x">Instagram</u
                 ></a>
               </div>
             </div>

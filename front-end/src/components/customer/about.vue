@@ -4,7 +4,7 @@
         <div class="mt-8 overflow-hidden">
           <div class="grid grid-cols-1 md:grid-cols-2">
             <div class="p-6">
-                <img src="https://www.procore.com/jobsite/wp-content/uploads/2022/10/iStock-1321891103.jpg"
+                <img src="@\assets\handshake.jpg"
                 class="w-full h-64 object-cover object-center rounded-lg shadow-md mb-10"/>
               <h2 class="text-3xl font-bold">
                 The Goal of CoCo Construction, LLC

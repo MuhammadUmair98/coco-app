@@ -53,7 +53,9 @@ async function findOne(projectId) {
     }));
 }
 
-async function deleteProject(id) { }
+async function deleteProject(proj_id) { 
+    return models.projectsModel.destroy({where : {proj_id}})
+}
 
 async function addProjectEquipments(equipments) {
     return models.projectEquipments.bulkCreate(equipments);

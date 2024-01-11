@@ -6,7 +6,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="bg-white rounded-lg shadow-lg p-6">
             <img
-              src="https://cleanmanagement.com/wp-content/uploads/2019/09/soil-excavation.jpg"
+              src="@\assets\soil-excavation.jpg"
               alt="Excavation"
               class="w-full h-40 object-cover mb-4 shadow rounded"
             />
@@ -18,7 +18,7 @@
           </div>
           <div class="bg-white rounded-lg shadow-lg p-6">
             <img
-              src="https://www.acuity.com/binaries/content/gallery/acuitycms/blogs/contractor-focus%5B2%5D/underground-pipes.jpg"
+              src="@\assets\underground-pipes.jpg"
               alt="Underground Utilities"
               class="w-full h-40 object-cover mb-4 shadow rounded"
             />
@@ -33,7 +33,7 @@
           </div>
           <div class="bg-white rounded-lg shadow-lg p-6">
             <img
-              src="https://www.aegion.com/-/media/Aegion2017/Images/CaseStudyPhotos/Beale_AFB_slipline_PP_UGS1525.ashx?h=320&la=en&w=569&mod=20190501152307"
+              src="@\assets\underground-fire-lines.jpg"
               alt="Underground Fire Lines"
               class="w-full h-40 object-cover mb-4 shadow rounded"
             />

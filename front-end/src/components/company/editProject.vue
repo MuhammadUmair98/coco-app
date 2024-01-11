@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-gray-50 dark:bg-gray-900 my-20">
+  <section class="min-h-full flex-col justify-center  sm:px-6 lg:px-20">
     <div
       class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
     >
@@ -33,17 +33,18 @@
               <label
                 for="password"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Project Desc</label
+                >Project Description</label
               >
-              <input
+              <textarea
                 type="text"
                 name="password"
                 id="password"
-                placeholder="Project Desc"
+                placeholder="Project Description"
                 v-model="project.proj_desc"
-                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                rows="4"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 resize-y"
                 required=""
-              />
+              ></textarea>
             </div>
             <div>
               <label
@@ -98,12 +99,32 @@
               </VueMultiselect>
             </div>
 
-            <div class="flex items-center justify-center">
+            <div class="flex items-center justify-center space-x-4">
               <button
-                class="w-full bg-blue-600 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-auto"
                 type="submit"
               >
                 Save
+              </button>
+              <button
+                type="reset"
+                class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-auto"
+                @click="$router.go(-1)"
+                >
+                  Cancel
+              </button>
+              <!-- <button
+                type="reset"
+                class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-auto"
+                @click="$router.go(-1)"
+                >
+                  Delete
+              </button> -->
+              <button 
+                class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-auto"
+                type="button"
+                >
+                  Delete
               </button>
             </div>
           </form>

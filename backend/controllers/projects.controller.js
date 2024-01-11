@@ -85,7 +85,18 @@ async function update(req, res, next) {
 
 async function findOne(req, res, next) { }
 
-async function deleteProject(req, res, next) { }
+async function deleteProject(req, res, next) {
+    try {
+        const { proj_id } = req.params;
+        await projectService.deleteProject(proj_id);
+        res.status(200).json({ message: 'success' });
+    } catch (error) {
+        res.status(400).json({
+            message: error.message,
+            error: error
+        });
+    }
+}
 
 async function addTask(req, res, next) {
     try {

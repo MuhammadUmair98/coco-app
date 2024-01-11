@@ -2,7 +2,7 @@
   <nav class="border-gray-200 px-2 sm:px-2 py-2.5 bg-stone-800 z-10" style="position: fixed; top: 0; width: 100%">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
       <div class="sm:w-1/12">
-        <a href="/"><img src="https://i.ibb.co/84bbGn2/logo.png" class="bg-white rounded-lg" /></a>
+        <a href="/"><img src="@\assets\logo.png" class="bg-white rounded-lg" /></a>
       </div>
 
       <ul

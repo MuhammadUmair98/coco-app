@@ -6,7 +6,7 @@
       <div class="flex flex-wrap justify-center">
         <div class="px-4 pt-6">
           <img
-            src="https://i.ibb.co/84bbGn2/logo.png"
+            src="@\assets\logo.png"
             class="flex justify-center"
           />
         </div>
@@ -15,19 +15,19 @@
         <tr>
           <td class="p-4 table-cell">
             <img
-              src="https://macongroup.com/wp-content/uploads/2021/03/Construction-Plans.jpg"
+              src="@\assets\Construction-Plans.jpg"
               class="tableImage shadow rounded sm:w-1/2 md:w-1/3 lg:w-1/4"
             />
           </td>
           <td class="p-4 table-cell">
             <img
-              src="https://imageio.forbes.com/specials-images/imageserve/62d033caf06f5c6179e20af7/Three-multi-ethnic-construction-workers-chatting/960x0.jpg?format=jpg&width=960"
+              src="@\assets\Construction-Talk.webp"
               class="tableImage shadow rounded sm:w-1/2 md:w-1/3 lg:w-1/4"
             />
           </td>
           <td class="p-4 table-cell">
             <img
-              src="https://gocodes.com/wp-content/uploads/2021/10/image-149.png"
+              src="@\assets\Construction-Concrete.webp"
               class="tableImage shadow rounded sm:w-1/2 md:w-1/3 lg:w-1/4"
             />
           </td>
@@ -56,7 +56,6 @@
 <style scoped>
 table {
   width: 100%;
-  display: block;
   margin: 0 auto;
   max-width: 100%;
   height: auto;

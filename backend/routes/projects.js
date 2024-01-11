@@ -26,3 +26,9 @@ router.post('/sub-tasks', projectsController.addSubTask);
  */
 router.delete('/delete-file/:fileId', projectsController.deleteFile);
 module.exports = router;
+
+/**
+ * Delete Files Routes
+ */
+router.delete('/delete-project/:proj_id', projectsController.deleteProject);
+module.exports = router;

@@ -1,11 +1,11 @@
 <template>
   <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-20">
     <div class="relative w-full overflow-x-auto mt-10">
-      <h1 class="text-3xl font-bold flex items-center justify-between" >
+      <h1 class="text-3xl font-bold flex items-center justify-between">
         <span>Projects</span>
-        <img src="@/assets/logo.png" class="h-12 ml-2">
+        <img src="@/assets/logo.png" class="h-12 ml-2" />
       </h1>
-      <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+      <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
     </div>
     <div class="relative w-full overflow-x-auto mb-5">
       <button
@@ -57,7 +57,9 @@
               {{ formatDate(project.proj_completion_date) }}
             </td>
             <td class="px-6 py-4">
-              {{ totDays(project.proj_start_date, project.proj_completion_date) }}
+              {{
+                totDays(project.proj_start_date, project.proj_completion_date)
+              }}
             </td>
             <td class="px-6 py-4 space-y-2">
               <button
@@ -80,6 +82,7 @@
               >
                 Files
               </button>
+              &nbsp;
               <button
                 v-if="userRole === 'Admin'"
                 @click="deleteProject(project.proj_id)"
@@ -93,7 +96,7 @@
         </tbody>
       </table>
     </div>
-  </div> 
+  </div>
 </template>
 
 <script>
@@ -108,11 +111,11 @@ export default {
       newProject: {
         proj_name: "",
       },
-      userRole : ''
+      userRole: "",
     };
   },
   mounted() {
-    this.userRole = localStorage.getItem('role');
+    this.userRole = localStorage.getItem("role");
     this.fetchProjects();
   },
   methods: {
@@ -135,20 +138,23 @@ export default {
     },
     formatDate(dateString) {
       if (!dateString) {
-      return '';
-    }
-      const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    },
-    totDays(date1, date2){
-      if(!date1 || !date2) {
-        return "N/A";
+        return "";
       }
-      else {
+      const date = new Date(dateString);
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    },
+    totDays(date1, date2) {
+      if (!date1 || !date2) {
+        return "N/A";
+      } else {
         date1 = new Date(date1);
         date2 = new Date(date2);
         var diffTime = date2.getTime() - date1.getTime();
-        var dayTime = Math.round((diffTime) / (1000 * 60 * 60 * 24));
+        var dayTime = Math.round(diffTime / (1000 * 60 * 60 * 24));
         return dayTime;
       }
     },
@@ -159,8 +165,7 @@ export default {
             `http://localhost:3000/api/projects/delete-project/${proj_id}`
           );
           this.fetchProjects();
-        } 
-        catch (error) {
+        } catch (error) {
           this.$root.$refs.toast.showToast(
             `${error.response.data.message}.....`,
             "error"
@@ -172,8 +177,11 @@ export default {
       this.$router.push({ name: "taskView", params: { id: project.proj_id } });
     },
     filesView: function (project) {
-      this.$router.push({ name: "projectFiles", params: { id: project.proj_id } });
-    }
+      this.$router.push({
+        name: "projectFiles",
+        params: { id: project.proj_id },
+      });
+    },
   },
 };
 </script>

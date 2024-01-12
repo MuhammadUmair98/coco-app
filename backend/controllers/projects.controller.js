@@ -1,5 +1,10 @@
 const projectService = require('../services/projects.services');
 const awsConfig = require('../config/aws.config');
+const ProjectEquipments = require('../models/projectEquipments');
+const TasksModel = require('../models/tasks.model');
+const FilesModel = require('../models/files.model');
+const Project = require('../models/projects.models');
+
 
 async function getAll(req, res, next) {
     try {
@@ -86,14 +91,32 @@ async function update(req, res, next) {
 async function findOne(req, res, next) { }
 
 async function deleteProject(req, res, next) {
+    const { proj_id } = req.params;
+
     try {
-        const { proj_id } = req.params;
-        await projectService.deleteProject(proj_id);
+        // Delete project relationships first
+        await ProjectEquipments.destroy({
+            where: { proj_id },
+        });
+
+        await TasksModel.destroy({
+            where: { proj_task_id: proj_id },
+        });
+
+        await FilesModel.destroy({
+            where: { project_id: proj_id },
+        });
+
+        // Delete the project itself
+        await Project.destroy({
+            where: { proj_id },
+        });
+
         res.status(200).json({ message: 'success' });
     } catch (error) {
         res.status(400).json({
             message: error.message,
-            error: error
+            error: error,
         });
     }
 }

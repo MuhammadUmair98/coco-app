@@ -38,16 +38,17 @@
             </thead>
             <tbody>
               <tr
-                v-for="project in projectsTaskSubTask"
+                v-for="(project, index) in projectsTaskSubTask"
                 :key="project.proj_id"
                 class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
               >
                 <td class="px-6 py-4">
                   <input
-                    v-model="project.subtask_completion"
+                    v-model="project.task_completion"
+                    @change="updateTaskStatus(index)"
+                    :value="project.task_completion"
                     id="vue-checkbox"
                     type="checkbox"
-                    value=""
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
                 </td>
@@ -117,7 +118,7 @@
             </thead>
             <tbody>
               <tr
-                v-for="project in subTasks"
+                v-for="(project, index) in subTasks"
                 :key="project.proj_id"
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               >
@@ -125,8 +126,9 @@
                   <input
                     id="vue-checkbox"
                     type="checkbox"
-                    value=""
                     v-model="project.subtask_completion"
+                    @change="updateSubTaskStatus(index)"
+                    :value="project.subtask_completion"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
                 </td>
@@ -195,6 +197,27 @@ export default {
     },
     viewFiles: async function (taskId) {
       this.$router.push({ name: "taskFiles", params: { id: taskId } });
+    },
+    async updateTaskStatus(index) {
+      const response = await axios.put(
+        "http://localhost:3000/api/projects/task-status",
+        {
+          taskId: this.projectsTaskSubTask[index].task_id,
+          isStatus: this.projectsTaskSubTask[index].task_completion,
+        }
+      );
+      this.$root.$refs.toast.showToast(`Task status updated`, "success");
+    },
+
+    async updateSubTaskStatus(index) {
+      const response = await axios.put(
+        "http://localhost:3000/api/projects/sub-task-status",
+        {
+          subTaskId: this.subTasks[index].subtask_id,
+          isStatus: this.subTasks[index].subtask_completion,
+        }
+      );
+      this.$root.$refs.toast.showToast(`Task sub status updated`, "success");
     },
   },
 };

@@ -240,7 +240,41 @@ async function getTaskSubTaskFiles(req, res, next) {
     });
   }
 }
+async function isTaskCompleted(req, res, next) {
+  try {
+    const { isStatus, taskId } = req.body;
+    TasksModel.update(
+      { task_completion: isStatus },
+      { where: { task_id: taskId } }
+    );
+    res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+      error: error,
+    });
+  }
+}
 
+async function isSubTaskCompleted(req, res, next) {
+  try {
+    const { isStatus, subTaskId } = req.body;
+    SubTask.update(
+      { subtask_completion: isStatus },
+      { where: { subtask_id: subTaskId } }
+    );
+    res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+      error: error,
+    });
+  }
+}
 module.exports = {
   getAll,
   add,
@@ -255,4 +289,6 @@ module.exports = {
   getFile,
   deleteFile,
   getTaskSubTaskFiles,
+  isTaskCompleted,
+  isSubTaskCompleted,
 };

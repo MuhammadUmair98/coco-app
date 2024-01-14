@@ -113,16 +113,10 @@
                 >
                   Cancel
               </button>
-              <!-- <button
-                type="reset"
-                class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-auto"
-                @click="$router.go(-1)"
-                >
-                  Delete
-              </button> -->
               <button 
+                @click="deleteProject(project.proj_id)"
                 class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-auto"
-                type="button"
+                type="submit"
                 >
                   Delete
               </button>
@@ -174,6 +168,21 @@ export default {
           `${error.response.data.message}.....`,
           "error"
         );
+      }
+    },
+    async deleteProject(proj_id) {
+      if (window.confirm("Are you sure you want to delete?")) {
+        try {
+          await axios.delete(
+            `http://localhost:3000/api/projects/delete-project/${proj_id}`
+          );
+          this.$router.go(-1);
+        } catch (error) {
+          this.$root.$refs.toast.showToast(
+            `${error.response.data.message}.....`,
+            "error"
+          );
+        }
       }
     },
     async fetchProject() {

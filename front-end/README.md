@@ -22,3 +22,13 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Backend
+cd backend
+npm install
+node ./bin/wwww
+
+### Frontend
+cd front-end
+npm install
+npm run serve

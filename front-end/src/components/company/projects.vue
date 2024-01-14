@@ -3,7 +3,7 @@
     <div class="relative w-full overflow-x-auto mt-10">
       <h1 class="text-3xl font-bold flex items-center justify-between">
         <span>Projects</span>
-        <img src="@/assets/logo.png" class="h-12 ml-2" />
+        <img src="@/assets/c_logo.png" class="h-12 ml-2" />
       </h1>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
     </div>
@@ -29,7 +29,7 @@
             <th scope="col" class="px-6 py-3">Description</th>
             <th scope="col" class="px-6 py-3">Start Date</th>
             <th scope="col" class="px-6 py-3">Completion Date</th>
-            <th scope="col" class="px-6 py-3">Days</th>
+            <th scope="col" class="px-6 py-3">Total Days</th>
             <th scope="col" class="px-6 py-3">Actions</th>
           </tr>
         </thead>
@@ -63,6 +63,7 @@
             </td>
             <td class="px-6 py-4 space-y-2">
               <button
+                v-if="userRole === 'Admin'"
                 @click="editProject(project)"
                 class="bg-blue-500 text-white px-4 py-1 rounded"
               >
@@ -81,15 +82,6 @@
                 class="bg-blue-500 text-white px-4 py-1 rounded"
               >
                 Files
-              </button>
-              &nbsp;
-              <button
-                v-if="userRole === 'Admin'"
-                @click="deleteProject(project.proj_id)"
-                class="bg-blue-500 text-white px-4 py-1 rounded"
-                type="submit"
-              >
-                Delete
               </button>
             </td>
           </tr>
@@ -122,7 +114,7 @@ export default {
     async fetchProjects() {
       try {
         const response = await axios.get("http://localhost:3000/api/projects");
-        this.projects = response.data.data;
+        this.projects = response.data.data.reverse();
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
@@ -156,21 +148,6 @@ export default {
         var diffTime = date2.getTime() - date1.getTime();
         var dayTime = Math.round(diffTime / (1000 * 60 * 60 * 24));
         return dayTime;
-      }
-    },
-    async deleteProject(proj_id) {
-      if (window.confirm("Are you sure you want to delete?")) {
-        try {
-          await axios.delete(
-            `http://localhost:3000/api/projects/delete-project/${proj_id}`
-          );
-          this.fetchProjects();
-        } catch (error) {
-          this.$root.$refs.toast.showToast(
-            `${error.response.data.message}.....`,
-            "error"
-          );
-        }
       }
     },
     taskView: function (project) {

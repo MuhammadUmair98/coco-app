@@ -33,7 +33,7 @@
                 <th scope="col" class="px-6 py-3">Start Date</th>
                 <th scope="col" class="px-6 py-3">Completion Date</th>
                 <th scope="col" class="px-6 py-3">Actions</th>
-                <th  scope="col" class="px-6 py-3">Attachments</th>
+                <th scope="col" class="px-6 py-3">Attachments</th>
               </tr>
             </thead>
             <tbody>
@@ -43,8 +43,13 @@
                 class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
               >
                 <td class="px-6 py-4">
-                  <input id="vue-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                  <label for="vue-checkbox" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ project.subtask_completion }}</label>
+                  <input
+                    v-model="project.subtask_completion"
+                    id="vue-checkbox"
+                    type="checkbox"
+                    value=""
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                  />
                 </td>
                 <td class="px-6 py-4">
                   {{ project.task_type }}
@@ -77,7 +82,7 @@
                                   </button> -->
                 </td>
                 <td>
-                <button
+                  <button
                     @click="viewFiles(project.task_id)"
                     class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded my-2 mx-1"
                   >
@@ -117,8 +122,13 @@
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               >
                 <td class="px-6 py-4">
-                  <input id="vue-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                  <label for="vue-checkbox" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ project.subtask_completion }}</label>
+                  <input
+                    id="vue-checkbox"
+                    type="checkbox"
+                    value=""
+                    v-model="project.subtask_completion"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                  />
                 </td>
                 <td class="px-6 py-4">
                   {{ project.subtask_desc }}
@@ -152,12 +162,12 @@ export default {
     return {
       projectsTaskSubTask: [],
       subTasks: [],
-      userRole : ''
+      userRole: "",
     };
   },
   mounted() {
     this.fetchProjectsTask();
-    this.userRole = localStorage.getItem('role');
+    this.userRole = localStorage.getItem("role");
   },
   methods: {
     async fetchProjectsTask() {
@@ -183,7 +193,7 @@ export default {
     addSubTaskView: function (taskId) {
       this.$router.push({ name: "addSubTask", params: { id: taskId } });
     },
-    viewFiles:async  function (taskId) {
+    viewFiles: async function (taskId) {
       this.$router.push({ name: "taskFiles", params: { id: taskId } });
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-full flex-col justify-center  sm:px-6 lg:px-20">
+  <section class="min-h-full flex-col justify-center sm:px-6 lg:px-20">
     <div
       class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
     >
@@ -110,15 +110,15 @@
                 type="reset"
                 class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-auto"
                 @click="$router.go(-1)"
-                >
-                  Cancel
+              >
+                Cancel
               </button>
-              <button 
+              <button
                 @click="deleteProject(project.proj_id)"
                 class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-auto"
-                type="submit"
-                >
-                  Delete
+                type="button"
+              >
+                Delete
               </button>
             </div>
           </form>
@@ -176,7 +176,7 @@ export default {
           await axios.delete(
             `http://localhost:3000/api/projects/delete-project/${proj_id}`
           );
-          this.$router.go(-1);
+          this.$router.push("/Projects");
         } catch (error) {
           this.$root.$refs.toast.showToast(
             `${error.response.data.message}.....`,

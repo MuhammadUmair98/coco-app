@@ -1,11 +1,11 @@
 <template>
-  <div class="min-h-screen flex flex-col py-12 sm:px-6 lg:px-20">
-    <div class="relative w-full overflow-x-auto mt-10">
+  <div class="min-h-screen py-20 sm:px-6 lg:px-20">
+    <div class="relative w-full overflow-x-auto">
       <h1 class="text-3xl font-bold flex items-center justify-between">
         <span>Tasks</span>
         <img src="@/assets/c_logo.png" class="h-12 ml-2" />
       </h1>
-      <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+      <hr class="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700" />
     </div>
     <div class="grid grid-cols-2 gap-4">
       <div>
@@ -67,14 +67,14 @@
                 <td class="px-6 py-4">
                   <button
                     @click="viewSubTasks(project.task_id)"
-                    class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded my-2 mx-1"
+                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
                     View SubTasks
                   </button>
                   <button
                     @click="addSubTaskView(project.task_id)"
                     v-if="userRole === 'Admin'"
-                    class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded my-2 mx-1"
+                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
                     Add SubTasks
                   </button>
@@ -85,7 +85,7 @@
                 <td>
                   <button
                     @click="viewFiles(project.task_id)"
-                    class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded my-2 mx-1"
+                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
                     Files
                   </button>
@@ -111,6 +111,7 @@
                 <th scope="col" class="px-6 py-3">Description</th>
                 <th scope="col" class="px-6 py-3">Start Date</th>
                 <th scope="col" class="px-6 py-3">Completion Date</th>
+                <th scope="col" class="px-6 py-3">Action</th>
                 <!-- <th scope="col" class="px-6 py-3">
                                   Files
                               </th> -->
@@ -140,6 +141,14 @@
                 </td>
                 <td class="px-6 py-4">
                   {{ project.subtask_comp_date }}
+                </td>
+                <td class="px-6 py-4">
+                  <button
+                    v-if="userRole === 'Admin'"
+                    class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                  >
+                    Delete
+                  </button>
                 </td>
                 <!-- <td class="px-6 py-4">
                           

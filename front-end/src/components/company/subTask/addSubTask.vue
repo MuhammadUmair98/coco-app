@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-gray-50 dark:bg-gray-900 my-20">
+    <section class="min-h-screen py-20 sm:px-6 lg:px-20">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <div
                 class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -25,8 +25,8 @@
                             <select name="taskCompletion" id="taskCompletion" v-model="subTask.subtask_completion"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required>
-                                <option value="0">Completed</option>
-                                <option value="1">Incomplete</option>
+                                <option value="1">Completed</option>
+                                <option value="0">Incomplete</option>
                             </select>
                         </div>
                         <div>

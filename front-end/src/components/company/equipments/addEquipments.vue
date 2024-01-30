@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-gray-50 dark:bg-gray-900 my-20">
+  <section class="min-h-screen py-20 sm:px-6 lg:px-20">
     <div
       class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
     >
@@ -28,7 +28,7 @@
                 id="email"
                 v-model="equipment.equip_name"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Wquipment Name"
+                placeholder="Equipment Name"
                 required=""
               />
             </div>
@@ -53,7 +53,7 @@
                 for="taskCompletion"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Equipment Owned
+                Owned/Leased
               </label>
               <select
                 name="taskCompletion"
@@ -70,13 +70,13 @@
               <label
                 for="password"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Equipment Desc</label
+                >Equipment Description</label
               >
               <input
                 type="text"
                 name="password"
                 id="password"
-                placeholder="Equipment Type"
+                placeholder="Equipment Description"
                 v-model="equipment.equip_desc"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required=""
@@ -92,7 +92,7 @@
                 type="text"
                 name="password"
                 id="password"
-                placeholder="Equipment Type"
+                placeholder="Equipment Serial Number"
                 v-model="equipment.equip_serial_num"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required=""
@@ -122,12 +122,19 @@
               >
               </VueDatePicker>
             </div>
-            <div class="flex items-center justify-center">
+            <div class="flex items-center justify-center space-x-4">
               <button
-                class="w-full bg-blue-600 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-auto"
                 type="submit"
               >
                 Save
+              </button>
+              <button
+                type="reset"
+                class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-auto"
+                @click="$router.go(-1)"
+              >
+                Cancel
               </button>
             </div>
           </form>
@@ -172,6 +179,7 @@ export default {
           `Equipment added successfully...`,
           "success"
         );
+        this.$router.go(-1);
         return response;
       } catch (error) {
         this.$root.$refs.toast.showToast(

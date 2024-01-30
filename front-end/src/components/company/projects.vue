@@ -1,11 +1,11 @@
 <template>
-  <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-20">
-    <div class="relative w-full overflow-x-auto mt-10">
+  <div class="min-h-screen py-20 sm:px-6 lg:px-20">
+    <div class="relative w-full overflow-x-auto">
       <h1 class="text-3xl font-bold flex items-center justify-between">
         <span>Projects</span>
         <img src="@/assets/c_logo.png" class="h-12 ml-2" />
       </h1>
-      <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+      <hr class="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700" />
     </div>
     <div class="relative w-full overflow-x-auto mb-5">
       <button
@@ -65,21 +65,21 @@
               <button
                 v-if="userRole === 'Admin'"
                 @click="editProject(project)"
-                class="bg-blue-500 text-white px-4 py-1 rounded"
+                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
               >
                 Edit
               </button>
               &nbsp;
               <button
                 @click="taskView(project)"
-                class="bg-blue-500 text-white px-4 py-1 rounded"
+                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
               >
                 Tasks
               </button>
               &nbsp;
               <button
                 @click="filesView(project)"
-                class="bg-blue-500 text-white px-4 py-1 rounded"
+                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
               >
                 Files
               </button>

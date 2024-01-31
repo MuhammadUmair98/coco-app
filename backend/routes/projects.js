@@ -18,12 +18,14 @@ router.get(
  * Task
  */
 router.post("/tasks", projectsController.addTask);
+router.delete("/tasks/:id", projectsController.deleteTask);
 router.post("/task-subtask-files", projectsController.getTaskSubTaskFiles);
 router.put("/task-status", projectsController.isTaskCompleted);
 /**
  * SubTasks
  */
 router.post("/sub-tasks", projectsController.addSubTask);
+router.delete('/sub-tasks/:id', projectsController.deleteSubTask);
 router.put("/sub-task-status", projectsController.isSubTaskCompleted);
 
 /**

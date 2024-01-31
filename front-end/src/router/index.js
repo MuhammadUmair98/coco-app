@@ -54,10 +54,16 @@ const routes = [
     component: () => import("../components/company/equipments/viewEquipments.vue")
   },
   {
-    path: "/addEquipments",
-    name: "addEquipments",
+    path: "/equipments",
+    name: "equipments",
     props : true,
-    component: () => import("../components/company/equipments/addEquipments.vue")
+    component: () => import("../components/company/equipments/viewEquipments.vue")
+  },
+  {
+    path: "/editEquipments/:id",
+    name: "editEquipments",
+    props : true,
+    component: () => import("../components/company/equipments/editEquipment.vue")
   },
   {
     path: "/projectView",

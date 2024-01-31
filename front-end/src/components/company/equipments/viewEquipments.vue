@@ -67,6 +67,14 @@
               >
                 Delete
               </button>
+              &nbsp;
+              <button
+                @click="openEditViewForEquipment(equipment)"
+                v-if="userRole === 'Admin'"
+                class="font-medium text-red-600 dark:text-red-500 hover:underline"
+              >
+                Edit
+              </button>
             </td>
           </tr>
         </tbody>
@@ -114,6 +122,12 @@ export default {
         return;
       }
     },
+    openEditViewForEquipment(equipment){
+      this.$router.push({
+        name: "editEquipments",
+        params: { id: equipment.equip_id },
+      });
+    }
   },
 };
 </script>

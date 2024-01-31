@@ -275,6 +275,36 @@ async function isSubTaskCompleted(req, res, next) {
     });
   }
 }
+
+async function deleteSubTask(req, res, next) {
+  try {
+    const { id } = req.params;
+    await projectService.deleteSubTasks(id);
+    res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+      error: error,
+    });
+  }
+}
+
+async function deleteTask(req, res, next) {
+  try {
+    const { id } = req.params;
+    await projectService.deleteTask(id);
+    res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+      error: error,
+    });
+  }
+}
 module.exports = {
   getAll,
   add,
@@ -291,4 +321,6 @@ module.exports = {
   getTaskSubTaskFiles,
   isTaskCompleted,
   isSubTaskCompleted,
+  deleteSubTask,
+  deleteTask
 };

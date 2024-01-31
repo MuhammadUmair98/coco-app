@@ -41,7 +41,7 @@
                         {{ file.file_url }}
                     </td>
                     <td class="px-6 py-4">
-                        <button @click="deleteFile(project)" class="bg-blue-500 text-white px-4 py-2 rounded">
+                        <button @click="deleteFile(file.id)" class="bg-blue-500 text-white px-4 py-2 rounded">
                             Delete
                         </button>
                         <button @click="downloadFile(file.file_url)" class="bg-blue-500 text-white px-4 py-2 rounded mx-2">
@@ -94,6 +94,15 @@ export default {
             });
         },
         async deleteFile(fileId) {
+            try {
+                await axios.delete(`http://localhost:3000/api/projects/delete-file/${fileId}`);
+                this.fetchFiles();
+            } catch (error) {
+                this.$root.$refs.toast.showToast(
+                    `${error.response.data.message}.....`,
+                    "error"
+                );
+            }
         },
         async handleFileChange(event) {
             this.file = event.target.files[0];

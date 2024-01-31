@@ -78,6 +78,12 @@
                   >
                     Add SubTasks
                   </button>
+                  <button
+                    @click="deleteTask(project.task_id)"
+                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  >
+                    Delete Task
+                  </button>
                   <!-- <button @click="taskView(project)" class="bg-blue-500 text-white px-4 py-2 rounded">
                                       Task / SubTask
                                   </button> -->
@@ -145,9 +151,17 @@
                 <td class="px-6 py-4">
                   <button
                     v-if="userRole === 'Admin'"
+                    @click="deleteSubTask(project.subtask_id)"
                     class="font-medium text-red-600 dark:text-red-500 hover:underline"
                   >
                     Delete
+                  </button>
+                  &nbsp;
+                  <button
+                    @click="openSubTaskFilesView(project.subtask_id)"
+                    class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                  >
+                    Files
                   </button>
                 </td>
                 <!-- <td class="px-6 py-4">
@@ -174,6 +188,7 @@ export default {
       projectsTaskSubTask: [],
       subTasks: [],
       userRole: "",
+      taskId : null
     };
   },
   mounted() {
@@ -200,6 +215,7 @@ export default {
     viewSubTasks: function (taskId) {
       const tasks = this.projectsTaskSubTask?.find((s) => s.task_id == taskId);
       this.subTasks = tasks.sub_task;
+      this.taskId = taskId;
     },
     addSubTaskView: function (taskId) {
       this.$router.push({ name: "addSubTask", params: { id: taskId } });
@@ -217,7 +233,6 @@ export default {
       );
       this.$root.$refs.toast.showToast(`Task status updated`, "success");
     },
-
     async updateSubTaskStatus(index) {
       const response = await axios.put(
         "http://localhost:3000/api/projects/sub-task-status",
@@ -228,6 +243,49 @@ export default {
       );
       this.$root.$refs.toast.showToast(`Task sub status updated`, "success");
     },
+    async deleteSubTask(subTaskId) {
+      try {
+        if (window.confirm("Are you sure you want to delete?")) {
+          const response = await axios.delete(
+            `http://localhost:3000/api/projects/sub-tasks/${subTaskId}`
+          );
+          this.$root.$refs.toast.showToast(`SubTask delete`, "success");
+          this.fetchProjectsTask().then((res) => {
+            this.viewSubTasks(this.taskId);
+          });
+        }
+      } catch (error) {
+        this.$root.$refs.toast.showToast(
+          `${error.response.data.message}.....`,
+          "error"
+        );
+      }
+    },
+    async deleteTask(taskId) {
+      try {
+        if (window.confirm("Are you sure you want to delete?")) {
+          const response = await axios.delete(
+            `http://localhost:3000/api/projects/tasks/${taskId}`
+          );
+          this.$root.$refs.toast.showToast(`Task deleted`, "success");
+          this.fetchProjectsTask();
+        }
+      } catch (error) {
+        this.$root.$refs.toast.showToast(
+          `${error.response.data.message}.....`,
+          "error"
+        );
+      }
+
+    },
+    openSubTaskFilesView(subTaskId){
+      this.$router.push(
+        {
+          name: "subTaskFiles",
+          params: { id: subTaskId }
+        }
+      );
+    }
   },
 };
 </script>

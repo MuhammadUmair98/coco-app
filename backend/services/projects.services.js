@@ -160,6 +160,14 @@ async function deleteFile(id) {
   return models.filesModel.destroy({ where: { id } });
 }
 
+async function deleteSubTasks(id){
+    return models.subTask.destroy({ where : { subtask_id : id } });
+}
+
+async function deleteTask(id){
+    return models.tasksModel.destroy({ where : { task_id : id } });
+}
+
 module.exports = {
   getAll,
   add,
@@ -175,4 +183,6 @@ module.exports = {
   getTaskFiles,
   getSubTaskFiles,
   deleteFile,
+  deleteSubTasks,
+  deleteTask
 };

@@ -13,10 +13,37 @@ async function getAll(req, res, next) {
   }
 }
 
+async function getOne(req, res, next) {
+  try {
+    const { id } = req.params;
+    const equipment = await equipmentServices.getOne(id);
+    res.status(200).json({ message: "success", data: equipment });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+      error: error,
+    });
+  }
+}
+
 async function add(req, res, next) {
   try {
     const data = req.body;
     const equipment = await equipmentServices.add(data);
+    res.status(200).json({ message: "success", data: equipment });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+      error: error,
+    });
+  }
+}
+
+async function update(req, res, next) {
+  try {
+    const data = req.body;
+    const { id , ...rest } = data;
+    const equipment = await equipmentServices.updateEquipment(id,rest);
     res.status(200).json({ message: "success", data: equipment });
   } catch (error) {
     res.status(400).json({
@@ -45,4 +72,6 @@ module.exports = {
   getAll,
   add,
   destroy,
+  update,
+  getOne
 };

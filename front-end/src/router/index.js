@@ -54,10 +54,10 @@ const routes = [
     component: () => import("../components/company/equipments/viewEquipments.vue")
   },
   {
-    path: "/equipments",
-    name: "equipments",
+    path: "/addEquipments",
+    name: "addEquipments",
     props : true,
-    component: () => import("../components/company/equipments/viewEquipments.vue")
+    component: () => import("../components/company/equipments/addEquipments.vue")
   },
   {
     path: "/editEquipments/:id",

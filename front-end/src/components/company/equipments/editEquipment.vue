@@ -76,6 +76,12 @@
                                 @click="$router.go(-1)">
                                 Cancel
                             </button>
+                            <button
+                                @click="deleteEquipments(equipment)"
+                                class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-auto"
+                            >
+                                Delete
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -160,6 +166,21 @@ export default {
                 return response;
             } catch (error) {
                 console.error("Error fetching equipment:", error);
+            }
+        },
+        async deleteEquipments(equipment) {
+            if (window.confirm("Are you sure you want to delete?")) {
+                try {
+                    await axios.delete(
+                        "http://localhost:3000/api/equipments/" + equipment.equip_id
+                    );
+                    this.$router.push("/Equipments");
+                } catch (error) {
+                    this.$root.$refs.toast.showToast(
+                        `${error.response.data.message}.....`,
+                        "error"
+                    );
+                }
             }
         },
     },

@@ -13,7 +13,7 @@ async function getAll() {
           {
             model: models.equipments,
             as: "equipment",
-            required: false,
+            required: true,
           },
         ],
       },
@@ -44,7 +44,7 @@ async function findOne(projectId) {
             {
               model: models.equipments,
               as: "equipment",
-              required: false,
+              required: true,
             },
           ],
         },

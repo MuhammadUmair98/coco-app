@@ -133,6 +133,7 @@ import axios from "axios";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import VueMultiselect from "vue-multiselect";
+import { base_url } from '../../config/config';
 
 export default {
   components: { VueDatePicker, VueMultiselect },
@@ -152,7 +153,7 @@ export default {
   methods: {
     async editProject() {
       try {
-        const response = await axios.put("http://localhost:3000/api/projects", {
+        const response = await axios.put(`${base_url}/api/projects`, {
           ...this.project,
           id: this.$route.params.id,
           equipments: this.selected ?? [],
@@ -174,7 +175,7 @@ export default {
       if (window.confirm("Are you sure you want to delete?")) {
         try {
           await axios.delete(
-            `http://localhost:3000/api/projects/delete-project/${proj_id}`
+            `${base_url}/api/projects/delete-project/${proj_id}`
           );
           this.$router.push("/Projects");
         } catch (error) {
@@ -188,7 +189,7 @@ export default {
     async fetchProject() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/projects/${this.project.id}`
+          `${base_url}/api/projects/${this.project.id}`
         );
         this.project = response.data.data;
         this.selected = this.project.project_equipments.map((equip) => {
@@ -203,7 +204,7 @@ export default {
     async fetchEquipments() {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/equipments"
+          `${base_url}/api/equipments`
         );
         this.equipments = response.data.data;
       } catch (error) {

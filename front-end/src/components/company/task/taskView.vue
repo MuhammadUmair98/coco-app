@@ -181,6 +181,7 @@
 
 <script>
 import axios from "axios";
+import { base_url } from '../../../config/config';
 
 export default {
   data() {
@@ -199,7 +200,7 @@ export default {
     async fetchProjectsTask() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/projects/project-tasks-sub-tasks/${this.$route.params.id}`
+          `${base_url}/api/projects/project-tasks-sub-tasks/${this.$route.params.id}`
         );
         this.projectsTaskSubTask = response.data.data;
       } catch (error) {
@@ -225,7 +226,7 @@ export default {
     },
     async updateTaskStatus(index) {
       const response = await axios.put(
-        "http://localhost:3000/api/projects/task-status",
+        `${base_url}/api/projects/task-status`,
         {
           taskId: this.projectsTaskSubTask[index].task_id,
           isStatus: this.projectsTaskSubTask[index].task_completion,
@@ -235,7 +236,7 @@ export default {
     },
     async updateSubTaskStatus(index) {
       const response = await axios.put(
-        "http://localhost:3000/api/projects/sub-task-status",
+        `${base_url}/api/projects/sub-task-status`,
         {
           subTaskId: this.subTasks[index].subtask_id,
           isStatus: this.subTasks[index].subtask_completion,
@@ -247,7 +248,7 @@ export default {
       try {
         if (window.confirm("Are you sure you want to delete?")) {
           const response = await axios.delete(
-            `http://localhost:3000/api/projects/sub-tasks/${subTaskId}`
+            `${base_url}/api/projects/sub-tasks/${subTaskId}`
           );
           this.$root.$refs.toast.showToast(`SubTask delete`, "success");
           this.fetchProjectsTask().then((res) => {
@@ -265,7 +266,7 @@ export default {
       try {
         if (window.confirm("Are you sure you want to delete?")) {
           const response = await axios.delete(
-            `http://localhost:3000/api/projects/tasks/${taskId}`
+            `${base_url}/api/projects/tasks/${taskId}`
           );
           this.$root.$refs.toast.showToast(`Task deleted`, "success");
           this.fetchProjectsTask();

@@ -85,6 +85,7 @@
   
 <script>
 import axios from "axios";
+import { base_url } from '../../../config/config';
 
 export default {
   data() {
@@ -102,7 +103,7 @@ export default {
     async fetchProjects() {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/equipments"
+          `${base_url}/api/equipments`
         );
         this.equipments = response.data.data;
       } catch (error) {
@@ -115,7 +116,7 @@ export default {
     async deleteEquipments(equipment) {
       if (window.confirm("Are you sure you want to delete?")) {
         await axios.delete(
-          "http://localhost:3000/api/equipments/" + equipment.equip_id
+          `${base_url}/api/equipments/` + equipment.equip_id
         );
         this.fetchProjects();
       } else {

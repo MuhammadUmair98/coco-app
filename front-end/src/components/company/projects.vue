@@ -93,6 +93,7 @@
 
 <script>
 import axios from "axios";
+import { base_url } from '../../config/config';
 
 export default {
   data() {
@@ -113,7 +114,8 @@ export default {
   methods: {
     async fetchProjects() {
       try {
-        const response = await axios.get("http://localhost:3000/api/projects");
+        console.log('==============', base_url)
+        const response = await axios.get(`${base_url}/api/projects`);
         this.projects = response.data.data.reverse();
       } catch (error) {
         console.error("Error fetching projects:", error);

@@ -149,6 +149,7 @@ import axios from "axios";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import VueMultiselect from "vue-multiselect";
+import { base_url } from '../../../config/config';
 
 export default {
   props: ["data"],
@@ -172,7 +173,7 @@ export default {
     async addEquipmwnts() {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/equipments",
+          `${base_url}/api/equipments`,
           { ...this.equipment }
         );
         this.$root.$refs.toast.showToast(

@@ -74,6 +74,7 @@ import axios from "axios";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import VueMultiselect from 'vue-multiselect'
+import { base_url } from '../../../config/config';
 
 export default {
     props: ['data'],
@@ -97,7 +98,7 @@ export default {
         async addTask() {
             try {
                 const response = await axios.post(
-                    "http://localhost:3000/api/projects/tasks",
+                    `${base_url}/api/projects/tasks`,
                     { ...this.task }
                 );
                 this.$root.$refs.toast.showToast(`Task added successfully...`, "success");

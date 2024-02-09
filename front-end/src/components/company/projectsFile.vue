@@ -104,6 +104,7 @@
 
 <script>
 import axios from "axios";
+import { base_url } from '../../config/config';
 
 export default {
   data() {
@@ -122,7 +123,7 @@ export default {
     async fetchProject() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/projects/${this.$route.params.id}`
+          `${base_url}/api/projects/${this.$route.params.id}`
         );
         this.projectFiles = response.data.data.project_files;
       } catch (error) {
@@ -133,7 +134,7 @@ export default {
       const url = fileUrl.split("/");
       const fileName = url[url.length - 1];
       axios({
-        url: `http://localhost:3000/api/projects/download/${fileName}`,
+        url: `${base_url}/api/projects/download/${fileName}`,
         method: "GET",
         responseType: "blob",
       }).then((response) => {
@@ -148,7 +149,7 @@ export default {
     async deleteFile(fileId) {
       try {
         await axios.delete(
-          `http://localhost:3000/api/projects/delete-file/${fileId}`
+          `${base_url}/api/projects/delete-file/${fileId}`
         );
         this.fetchProject();
       } catch (error) {
@@ -168,7 +169,7 @@ export default {
         formData.append("file", this.file);
         formData.append("identifier", "project");
         formData.append("id", this.$route.params.id);
-        await axios.post("http://localhost:3000/api/projects/files", formData, {
+        await axios.post(`${base_url}/api/projects/files`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

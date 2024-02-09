@@ -77,6 +77,7 @@
                                 Cancel
                             </button>
                             <button
+                                type="button"
                                 @click="deleteEquipments(equipment)"
                                 class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-auto"
                             >
@@ -95,6 +96,7 @@ import axios from "axios";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import VueMultiselect from "vue-multiselect";
+import { base_url } from '../../../config/config';
 
 export default {
     props: ["data"],
@@ -121,27 +123,8 @@ export default {
     methods: {
         async editEquipment() {
             try {
-                const response = await axios.post(
-                    "http://localhost:3000/api/equipments",
-                    { ...this.equipment }
-                );
-                this.$root.$refs.toast.showToast(
-                    `Equipment added successfully...`,
-                    "success"
-                );
-                this.$router.go(-1);
-                return response;
-            } catch (error) {
-                this.$root.$refs.toast.showToast(
-                    `${error?.response?.data.message}.....`,
-                    "error"
-                );
-            }
-        },
-        async editEquipment() {
-            try {
                 const response = await axios.put(
-                    "http://localhost:3000/api/equipments",
+                    `${base_url}/api/equipments`,
                     { ...this.equipment , id : this.$route.params.id }
                 );
                 this.$root.$refs.toast.showToast(
@@ -160,7 +143,7 @@ export default {
         async getEquipment() {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/api/equipments/${this.equipment.id}`
+                    `${base_url}/api/equipments/${this.equipment.id}`
                 );
                 this.equipment = response.data.data;
                 return response;
@@ -169,18 +152,20 @@ export default {
             }
         },
         async deleteEquipments(equipment) {
-            if (window.confirm("Are you sure you want to delete?")) {
+           if (window.confirm("Are you sure you want to delete?")) {
                 try {
                     await axios.delete(
-                        "http://localhost:3000/api/equipments/" + equipment.equip_id
+                        `${base_url}/api/equipments/${equipment.equip_id}`
                     );
-                    this.$router.push("/Equipments");
+                    this.$router.go(-1);
                 } catch (error) {
                     this.$root.$refs.toast.showToast(
                         `${error.response.data.message}.....`,
                         "error"
                     );
                 }
+            }else{
+                return;
             }
         },
     },

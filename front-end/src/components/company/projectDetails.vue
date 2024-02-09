@@ -125,6 +125,7 @@ import axios from "axios";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import VueMultiselect from "vue-multiselect";
+import {base_url} from '../../config/config';
 
 export default {
   props: ["data"],
@@ -151,7 +152,7 @@ export default {
     async login() {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/projects",
+          `${base_url}/api/projects`,
           { ...this.project, equipments: this.selected ?? [] }
         );
         this.$root.$refs.toast.showToast(
@@ -170,7 +171,7 @@ export default {
     async fetchEquipments() {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/equipments"
+          `${base_url}/api/equipments`
         );
         this.equipments = response.data.data;
       } catch (error) {

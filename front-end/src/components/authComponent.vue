@@ -95,6 +95,8 @@
 
 <script>
 import axios from "axios";
+import { base_url } from '../config/config';
+
 export default {
   data() {
     return {
@@ -106,7 +108,7 @@ export default {
     async login() {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/users/login",
+          `${base_url}/api/users/login`,
           { email: this.email, password: this.password }
         );
         this.$store.commit('setLoggedIn', true);

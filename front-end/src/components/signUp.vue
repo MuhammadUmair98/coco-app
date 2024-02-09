@@ -60,6 +60,8 @@
     
 <script>
 import axios from 'axios';
+import { base_url } from '../config/config';
+
 export default {
     data() {
         return {
@@ -75,7 +77,7 @@ export default {
     methods: {
         async register() {
             try {
-                const response = await axios.post('http://localhost:3000/api/users/register', { email: this.email, password: this.password , roleId : this.selectedRole });
+                const response = await axios.post(`${base_url}/api/users/register`, { email: this.email, password: this.password , roleId : this.selectedRole });
                 this.$root.$refs.toast.showToast(`User registered successfully  !`, 'success');
                 return response;
             } catch (error) {
@@ -84,7 +86,7 @@ export default {
         },
         async fetchRoles() {
             try {
-                const response = await axios.get('http://localhost:3000/api/roles');
+                const response = await axios.get(`${base_url}/api/roles`);
                 this.roles = response.data.data;
             } catch (error) {
                 console.error('Error fetching roles:', error);

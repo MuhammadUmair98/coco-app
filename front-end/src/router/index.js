@@ -54,6 +54,24 @@ const routes = [
     component: () => import("../components/company/equipments/viewEquipments.vue")
   },
   {
+    path: "/users",
+    name: "users",
+    props : true,
+    component: () => import("../components/company/users/usersView.vue")
+  },
+  {
+    path: "/addUser",
+    name: "addUser",
+    props : true,
+    component: () => import("../components/company/users/addUser.vue")
+  },
+  {
+    path: "/editUser/:id",
+    name: "editUser",
+    props : true,
+    component: () => import("../components/company/users/editUser.vue")
+  },
+  {
     path: "/addEquipments",
     name: "addEquipments",
     props : true,

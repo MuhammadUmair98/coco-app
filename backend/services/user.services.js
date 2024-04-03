@@ -7,6 +7,10 @@ async function findUser(where) {
     return parse(await models.userModel.findOne({ where: where, include: { model: models.roleModels, as: 'role' } }));
 }
 
+async function findAllUser(where) {
+    return parse(await models.userModel.findAll({ where: where, include: { model: models.roleModels, as: 'role' } }));
+}
+
 async function encryptPassword(password) {
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password, salt);
@@ -25,10 +29,23 @@ async function createUser(data) {
     return models.userModel.create(data);
 }
 
+async function deleteUser(id) {
+    return models.userModel.destroy({ where: { id: id } });
+}
+
+async function editUser(id, data) {
+    return models.userModel.update(data, {
+        where: { id: parseInt(id) },
+    });
+}
+
 module.exports = {
     findUser,
     encryptPassword,
     decryptPassword,
     authenticateUser,
-    createUser
+    createUser,
+    findAllUser,
+    deleteUser,
+    editUser
 }

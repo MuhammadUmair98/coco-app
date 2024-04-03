@@ -39,6 +39,14 @@
             >
           </router-link>
         </li>
+        <li v-if="role === 'Admin'">
+          <router-link to="/users">
+            <a
+              class="block py-2 pl-3 pr-4 rounded md:p-0 text-gray-400 hover:text-orange-300"
+              >Users</a
+            >
+          </router-link>
+        </li>
         <li>
           <a
             class="block py-2 pl-3 pr-4 rounded md:p-0 text-gray-400 hover:text-orange-300 cursor-pointer"
@@ -53,6 +61,14 @@
 
 <script>
 export default {
+  data() {
+    return {
+      role: ''
+    }
+  },
+  mounted() {
+    this.role = localStorage.getItem('role');
+  },
   methods: {
     handleSignOut() {
       localStorage.setItem("token", "");

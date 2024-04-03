@@ -76,7 +76,7 @@
                 Sign In
               </button>
             </div>
-            <router-link to="/signUp">
+            <!-- <router-link to="/signUp">
               <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?
                 <a
@@ -85,7 +85,7 @@
                   >Sign up</a
                 >
               </p>
-            </router-link>
+            </router-link> -->
           </form>
         </div>
       </div>

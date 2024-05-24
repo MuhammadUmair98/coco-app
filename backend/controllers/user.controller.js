@@ -51,7 +51,79 @@ async function register(req, res, nex) {
     }
 }
 
+async function getAll(req, res, nex) {
+    try {
+       const users = await userService.findAllUser({});
+       res.status(200).json({
+        message: 'success',
+        data: users
+    })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message,
+            error: error
+        });
+    }
+}
+
+async function getUser(req,res,next){
+    try {
+        const { id } = req.params;
+        const user = await userService.findUser({ id  });
+        res.status(200).json({
+         message: 'success',
+         data: user
+     })
+     } catch (error) {
+         res.status(400).json({
+             message: error.message,
+             error: error
+         });
+     }
+}
+
+async function deleteUser(req,res,next){
+    try {
+        const { id } = req.params;
+        await userService.deleteUser(id);
+        res.status(200).json({
+            message: 'success',
+            data: {}
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message,
+            error: error
+        });
+    }
+}
+
+async function editUser(req,res,next){
+    try {
+        const { id } = req.params;
+        const body = req.body;
+        const user = await userService.findUser({ email : body.email });
+        if (user) {
+            throw new Error('User already exist');
+        }
+        await userService.editUser(id,body);
+        res.status(200).json({
+            message: 'success',
+            data: {}
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message,
+            error: error
+        });
+    }
+}
+
 module.exports = {
     login,
-    register
+    register,
+    getAll,
+    deleteUser,
+    getUser,
+    editUser
 }; 

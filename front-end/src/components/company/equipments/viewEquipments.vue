@@ -2,7 +2,7 @@
   <div class="min-h-screen py-20 sm:px-6 lg:px-20">
     <div class="relative w-full overflow-x-auto">
       <h1 class="text-3xl font-bold flex items-center justify-between">
-        <span>Equipment</span>
+        <span>Equipments</span>
         <img src="@/assets/c_logo.png" class="h-12 ml-2" />
       </h1>
       <hr class="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700" />

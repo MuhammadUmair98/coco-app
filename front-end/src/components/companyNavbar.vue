@@ -7,7 +7,7 @@
       <div class="sm:w-1/12">
         <a href="/"
           ><img
-            src="https://i.ibb.co/84bbGn2/logo.png"
+            src="@/assets/logo.png"
             class="bg-white rounded-lg"
         /></a>
       </div>
